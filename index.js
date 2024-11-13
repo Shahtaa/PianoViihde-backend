@@ -1,7 +1,7 @@
 // /Users/s2301506/Documents/PianoViihde-backend/index.js
 const express = require('express');
 const cors = require('cors');
-const servicesRouter = require('./services'); // Import the services router
+const servicesRouter = require('./routes/services'); // Import the services router
 
 const app = express();
 const port = 3000;
