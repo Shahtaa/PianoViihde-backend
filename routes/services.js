@@ -8,35 +8,35 @@ const services = [
     title: 'Livemusiikki ravintoloissa',
     description:
       'Tarjoamme eläviä musiikkiesityksiä ravintoloissa ja muissa tiloissa, joissa tunnelma luodaan musiikin avulla.',
-    imageUrl: 'https://via.placeholder.com/350x200',
+    imageUrl: '/images/tilaisuus.jpg',
     moreInfoUrl: '/services/livemusiikki-ravintoloissa',
   },
   {
     title: 'Yritystilaisuudet',
     description:
       'Räätälöimme musiikkiesityksiä yritystilaisuuksiin, konferensseihin ja juhliin, jotka luovat mieleenpainuvia kokemuksia.',
-    imageUrl: 'https://via.placeholder.com/350x200',
+    imageUrl: '/images/tilaisuus.jpg',
     moreInfoUrl: '/services/yritystilaisuudet',
   },
   {
     title: 'Taustamusiikkia tilaisuuksiin',
     description:
       'Tarjoamme taustamusiikkia monenlaisiin tilaisuuksiin, kuten vastaanottoihin, kokouksiin ja juhlien tunnelman luomiseen.',
-    imageUrl: 'https://via.placeholder.com/350x200',
+    imageUrl: '/images/tilaisuus.jpg',
     moreInfoUrl: '/services/taustamusiikkia-tilaisuuksiin',
   },
   {
     title: 'Häämusiikki',
     description:
       'Erityisesti hääjuhliin tarjoamme kauniita musiikkiesityksiä, jotka tekevät päivästä unohtumattoman.',
-    imageUrl: 'https://via.placeholder.com/350x200',
+    imageUrl: '/images/tilaisuus.jpg',
     moreInfoUrl: '/services/haamusiikki',
   },
   {
     title: 'Sävellyspalvelut',
     description:
       'Tarjoamme sävellyspalveluja niin yksityisille kuin yrityksille – luomme musiikkia erilaisiin projekteihin ja tilaisuuksiin.',
-    imageUrl: 'https://via.placeholder.com/350x200',
+    imageUrl: '/images/tilaisuus.jpg',
     moreInfoUrl: '/services/savellyspalvelut',
   },
 ]
