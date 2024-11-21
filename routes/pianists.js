@@ -51,7 +51,7 @@ const pianists = [
 ];
 
 // Define the route to get all pianists
-router.get('/', (req, res) => {
+router.get('/api/pianists', (req, res) => {
     res.json(pianists);
 });
 

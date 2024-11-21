@@ -6,7 +6,7 @@ const artists = [
     {
         name: 'Anna Katariina',
         description: 'Lyhyt kuvaus Anna Katariinasta.',
-        imageUrl: '/images/artists_jpg.jpg', // This can be a static asset or a URL
+        imageUrl: '/images/artists_jpg.jpg',
         moreInfoUrl: '/artists/anna-katariina',
         facebookUrl: 'https://facebook.com',
         instagramUrl: 'https://instagram.com',
