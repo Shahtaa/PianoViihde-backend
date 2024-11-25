@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
+
 const servicesRouter = require('./routes/services') // Import the services router
 const artistsRouter = require('./routes/artists') // Import the artists router
 const pianistsRouter = require('./routes/pianists') // Import the pianists router
@@ -14,10 +15,10 @@ app.use(cors()) // Enable CORS for all routes
 app.use(express.json()) // Parse incoming JSON requests
 
 // Use the services routes
-app.use(servicesRouter)
+app.use('/api/services', servicesRouter)
 
 // Use the artists routes
-app.use(artistsRouter)
+app.use('/api/artists', artistsRouter)
 
 // Use the pianists routes
 app.use(pianistsRouter)
