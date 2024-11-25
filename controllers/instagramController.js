@@ -1,7 +1,6 @@
 const axios = require('axios')
 
-const ACCESS_TOKEN =
-  'IGQWRNYlFBdE16dHZARVWdNUVlBNXl5eVQzMmkwRUEwcHp0RXpoT0VwTkpVWk5sR1dsaXdaaFF1Ukc1a2dGR3NnRkQ3amtqVlFtTGF1YkdqWnFHMHhaQWpLMUhUellMVnJyZA0ZAtd0ExcHRIdVV0MHRCRzBIbnQ4TmMZD' // Ваш токен Instagram
+const ACCESS_TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN
 
 const getInstagramFeed = async (req, res) => {
   try {
