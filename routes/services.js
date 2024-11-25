@@ -42,8 +42,8 @@ const services = [
 ]
 
 // Define the route to get services
-router.get('/api/services', (req, res) => {
-  res.json(services)
-})
+router.get('/', (req, res) => {
+  res.json(services);
+});
 
-module.exports = router
+module.exports = router;

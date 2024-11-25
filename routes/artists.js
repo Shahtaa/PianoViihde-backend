@@ -1,6 +1,5 @@
-// /Users/s2301506/Documents/PianoViihde-backend/artists.js
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
 // Mock data for artists
 const artists = [
@@ -121,11 +120,11 @@ const artists = [
         instagramUrl: 'https://instagram.com',
         youtubeUrl: 'https://youtube.com',
     },
-]
+];
 
-// Define the route to get artists
-router.get('/api/artists', (req, res) => {
-    res.json(artists)
-})
+// Define the route to get all artists
+router.get('/', (req, res) => {
+    res.json(artists);
+});
 
-module.exports = router
+module.exports = router;

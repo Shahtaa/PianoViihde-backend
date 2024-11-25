@@ -8,8 +8,9 @@ const instagramRouter = require('./routes/instagram') // Import Instagram router
 const app = express()
 const port = 3000
 
-app.use(cors())
-app.use(express.json())
+// Middleware
+app.use(cors());  // Enable CORS for all routes
+app.use(express.json());  // Parse incoming JSON requests
 
 // Use the services routes
 app.use(servicesRouter)
@@ -26,6 +27,17 @@ app.use('/api/instagram', instagramRouter)
 // Define a route for the root endpoint
 app.get('/', (req, res) => {
     res.send('Welcome to the PianoViihde Backend!');
+});
+
+// 404 handler for undefined routes
+app.use((req, res, next) => {
+    res.status(404).json({ message: 'Route not found' });
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+    console.error(err.stack);  // Logs the error stack to the console
+    res.status(500).json({ message: 'Something went wrong' });
 });
 
 // Start the server and listen on the defined port
