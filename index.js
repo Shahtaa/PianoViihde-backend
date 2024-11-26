@@ -1,48 +1,52 @@
-require('dotenv').config()
-const express = require('express')
-const cors = require('cors')
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
 
-const servicesRouter = require('./routes/services') // Import the services router
-const artistsRouter = require('./routes/artists') // Import the artists router
-const pianistsRouter = require('./routes/pianists') // Import the pianists router
-const instagramRouter = require('./routes/instagram') // Import Instagram router
+const servicesRouter = require('./routes/services');
+const artistsRouter = require('./routes/artists');
+const pianistsRouter = require('./routes/pianists');
+const instagramRouter = require('./routes/instagram');
+const gigsRouter = require('./routes/gigs'); // Import the gigs router
 
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
 
 // Middleware
-app.use(cors()) // Enable CORS for all routes
-app.use(express.json()) // Parse incoming JSON requests
+app.use(cors()); // Enable CORS for all routes
+app.use(express.json()); // Parse incoming JSON requests
 
 // Use the services routes
-app.use('/api/services', servicesRouter)
+app.use('/api/services', servicesRouter);
 
 // Use the artists routes
-app.use('/api/artists', artistsRouter)
+app.use('/api/artists', artistsRouter);
 
 // Use the pianists routes
-app.use(pianistsRouter)
+app.use(pianistsRouter);
 
 // Use the Instagram routes
-app.use('/api/instagram', instagramRouter)
+app.use('/api/instagram', instagramRouter);
+
+// Use the gigs routes
+app.use('/api/gigs', gigsRouter); // Add the gigs router
 
 // Define a route for the root endpoint
 app.get('/', (req, res) => {
-  res.send('Welcome to the PianoViihde Backend!')
-})
+  res.send('Welcome to the PianoViihde Backend!');
+});
 
 // 404 handler for undefined routes
 app.use((req, res, next) => {
-  res.status(404).json({ message: 'Route not found' })
-})
+  res.status(404).json({ message: 'Route not found' });
+});
 
 // Global error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack) // Logs the error stack to the console
-  res.status(500).json({ message: 'Something went wrong' })
-})
+  console.error(err.stack); // Logs the error stack to the console
+  res.status(500).json({ message: 'Something went wrong' });
+});
 
 // Start the server and listen on the defined port
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`)
-})
+  console.log(`Server running at http://localhost:${port}`);
+});
