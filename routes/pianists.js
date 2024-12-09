@@ -84,7 +84,7 @@ router.get('/api/pianists', (req, res) => {
 
 router.get('/api/pianists/:id', (req, res) => {
   const { id } = req.params
-  const pianist = pianists.find((p) => p.id === parseInt(id, 10)) // Ищем по числовому ID
+  const pianist = pianists.find((p) => p.id === parseInt(id, 10)) 
   if (pianist) {
     res.json(pianist)
   } else {
