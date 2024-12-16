@@ -1,11 +1,11 @@
 const mysql = require('mysql2')
 
-// Настройки подключения к базе данных
+// DB configuration
 const pool = mysql.createPool({
-  host: 'localhost', // Адрес сервера базы данных
-  user: 'root', // Пользователь базы данных
-  database: 'pianoviihde', // Имя базы данных
+  host: 'localhost',
+  user: 'root',
+  database: 'pianoviihde',
 })
 
-// Экспортируем объект pool для выполнения запросов
+
 module.exports = pool.promise()
