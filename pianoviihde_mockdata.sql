@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `artist_videos`
+--
+
+DROP TABLE IF EXISTS `artist_videos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `artist_videos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `artist_id` int NOT NULL,
+  `videoUrl` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `artist_id` (`artist_id`),
+  CONSTRAINT `artist_videos_ibfk_1` FOREIGN KEY (`artist_id`) REFERENCES `artists` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `artist_videos`
+--
+
+LOCK TABLES `artist_videos` WRITE;
+/*!40000 ALTER TABLE `artist_videos` DISABLE KEYS */;
+INSERT INTO `artist_videos` VALUES (1,1,'https://www.youtube.com/embed/DCopcNpzc60'),(2,1,'https://www.youtube.com/embed/oGlDJ3GxvLc'),(3,2,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(4,2,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(5,3,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(6,3,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(7,4,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(8,4,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(9,5,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(10,5,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(11,1,'https://www.youtube.com/embed/DCopcNpzc60'),(12,1,'https://www.youtube.com/embed/oGlDJ3GxvLc'),(13,2,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(14,2,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(15,3,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(16,3,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(17,4,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(18,4,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(19,5,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(20,5,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(21,6,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(22,6,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(23,7,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(24,7,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(25,8,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(26,8,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(27,9,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(28,9,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(29,10,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(30,10,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(31,11,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(32,11,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(33,12,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(34,12,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(35,13,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(36,13,'https://www.youtube.com/embed/dQw4w9WgXcQ');
+/*!40000 ALTER TABLE `artist_videos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `artists`
 --
 
@@ -29,7 +56,6 @@ CREATE TABLE `artists` (
   `imageUrl` varchar(255) DEFAULT NULL,
   `facebookUrl` varchar(255) DEFAULT NULL,
   `instagramUrl` varchar(255) DEFAULT NULL,
-  `youtubeUrl` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -40,8 +66,34 @@ CREATE TABLE `artists` (
 
 LOCK TABLES `artists` WRITE;
 /*!40000 ALTER TABLE `artists` DISABLE KEYS */;
-INSERT INTO `artists` VALUES (1,'Anna Katariina','Lyhyt kuvaus Anna Katariinasta.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com','https://youtube.com'),(2,'Duo Songbirds','Lyhyt kuvaus Duo Songbirdsistä.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com','https://youtube.com'),(3,'Saksofonisti Anton Morozov','Lyhyt kuvaus Anton Morozovista.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com','https://youtube.com'),(4,'Tytti Koivunen','Lyhyt kuvaus Tytti Koivusesta.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com','https://youtube.com'),(5,'Lotta Virkkunen','Lyhyt kuvaus Lotta Virkkusesta.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com','https://youtube.com'),(6,'Tanja Vähäsarja','Lyhyt kuvaus Tanja Vähäsarjasta.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com','https://youtube.com'),(7,'Juontaja Kimmo Oksanen','Lyhyt kuvaus Kimmo Oksasesta.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com','https://youtube.com'),(8,'Toni Jokiniitty','Lyhyt kuvaus Toni Jokiniitystä.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com','https://youtube.com'),(9,'Joonas Eloranta','Lyhyt kuvaus Joonas Elorannasta.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com','https://youtube.com'),(10,'PUSHKIN Quintett','Lyhyt kuvaus PUSHKIN Quintetista.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com','https://youtube.com'),(11,'Night Shift','Lyhyt kuvaus Night Shiftistä.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com','https://youtube.com'),(12,'Henriikka Roo','Lyhyt kuvaus Henriikka Roosta.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com','https://youtube.com'),(13,'Tampereen Ukuleleorkesteri','Lyhyt kuvaus Tampereen Ukuleleorkesterista.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com','https://youtube.com');
+INSERT INTO `artists` VALUES (1,'Anna Katariina','Lyhyt kuvaus Anna Katariinasta.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com'),(2,'Duo Songbirds','Lyhyt kuvaus Duo Songbirdsistä.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com'),(3,'Saksofonisti Anton Morozov','Lyhyt kuvaus Anton Morozovista.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com'),(4,'Tytti Koivunen','Lyhyt kuvaus Tytti Koivusesta.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com'),(5,'Lotta Virkkunen','Lyhyt kuvaus Lotta Virkkusesta.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com'),(6,'Tanja Vähäsarja','Lyhyt kuvaus Tanja Vähäsarjasta.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com'),(7,'Juontaja Kimmo Oksanen','Lyhyt kuvaus Kimmo Oksasesta.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com'),(8,'Toni Jokiniitty','Lyhyt kuvaus Toni Jokiniitystä.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com'),(9,'Joonas Eloranta','Lyhyt kuvaus Joonas Elorannasta.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com'),(10,'PUSHKIN Quintett','Lyhyt kuvaus PUSHKIN Quintetista.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com'),(11,'Night Shift','Lyhyt kuvaus Night Shiftistä.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com'),(12,'Henriikka Roo','Lyhyt kuvaus Henriikka Roosta.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com'),(13,'Tampereen Ukuleleorkesteri','Lyhyt kuvaus Tampereen Ukuleleorkesterista.','/images/artists_jpg.jpg','https://facebook.com','https://instagram.com');
 /*!40000 ALTER TABLE `artists` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gigs`
+--
+
+DROP TABLE IF EXISTS `gigs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `gigs` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `location` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gigs`
+--
+
+LOCK TABLES `gigs` WRITE;
+/*!40000 ALTER TABLE `gigs` DISABLE KEYS */;
+INSERT INTO `gigs` VALUES (1,'Ravintola Helsinki','2024-12-25','Helsinki, Finland'),(2,'Yritystilaisuus Espoo','2024-12-30','Espoo, Finland'),(3,'Uudenvuoden juhla','2024-12-31','Tampere, Finland'),(4,'Kesäjuhla','2025-07-01','Turku, Finland'),(5,'Festival Espoo','2025-08-15','Espoo, Finland'),(6,'Jazz Night','2025-09-20','Helsinki, Finland'),(7,'Private Event','2025-10-05','Oulu, Finland'),(8,'Christmas Party','2025-12-24','Rovaniemi, Finland');
+/*!40000 ALTER TABLE `gigs` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -164,4 +216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-16 14:33:21
+-- Dump completed on 2024-12-16 15:19:11
