@@ -1,189 +1,32 @@
-const artists = [
-  {
-    id: 1,
-    name: 'Anna Katariina',
-    description: 'Lyhyt kuvaus Anna Katariinasta.',
-    imageUrl: '/images/artists_jpg.jpg',
-    facebookUrl: 'https://facebook.com',
-    instagramUrl: 'https://instagram.com',
-    youtubeUrl: 'https://youtube.com',
-    videos: [
-      'https://www.youtube.com/embed/DCopcNpzc60',
-      'https://www.youtube.com/embed/oGlDJ3GxvLc',
-    ],
-  },
-  {
-    id: 2,
-    name: 'Duo Songbirds',
-    description: 'Lyhyt kuvaus Duo Songbirdsistä.',
-    imageUrl: '/images/artists_jpg.jpg',
-    facebookUrl: 'https://facebook.com',
-    instagramUrl: 'https://instagram.com',
-    youtubeUrl: 'https://youtube.com',
-    videos: [
-      'https://www.youtube.com/embed/DCopcNpzc60',
-      'https://www.youtube.com/embed/oGlDJ3GxvLc',
-    ],
-  },
-  {
-    id: 3,
-    name: 'Saksofonisti Anton Morozov',
-    description: 'Lyhyt kuvaus Anton Morozovista.',
-    imageUrl: '/images/artists_jpg.jpg',
-    facebookUrl: 'https://facebook.com',
-    instagramUrl: 'https://instagram.com',
-    youtubeUrl: 'https://youtube.com',
-    videos: [
-      'https://www.youtube.com/embed/DCopcNpzc60',
-      'https://www.youtube.com/embed/oGlDJ3GxvLc',
-    ],
-  },
-  {
-    id: 4,
-    name: 'Tytti Koivunen',
-    description: 'Lyhyt kuvaus Tytti Koivusesta.',
-    imageUrl: '/images/artists_jpg.jpg',
-    facebookUrl: 'https://facebook.com',
-    instagramUrl: 'https://instagram.com',
-    youtubeUrl: 'https://youtube.com',
-    videos: [
-      'https://www.youtube.com/embed/DCopcNpzc60',
-      'https://www.youtube.com/embed/oGlDJ3GxvLc',
-    ],
-  },
-  {
-    id: 5,
-    name: 'Lotta Virkkunen',
-    description: 'Lyhyt kuvaus Lotta Virkkusesta.',
-    imageUrl: '/images/artists_jpg.jpg',
-    facebookUrl: 'https://facebook.com',
-    instagramUrl: 'https://instagram.com',
-    youtubeUrl: 'https://youtube.com',
-    videos: [
-      'https://www.youtube.com/embed/DCopcNpzc60',
-      'https://www.youtube.com/embed/oGlDJ3GxvLc',
-    ],
-  },
-  {
-    id: 6,
-    name: 'Tanja Vähäsarja',
-    description: 'Lyhyt kuvaus Tanja Vähäsarjasta.',
-    imageUrl: '/images/artists_jpg.jpg',
-    facebookUrl: 'https://facebook.com',
-    instagramUrl: 'https://instagram.com',
-    youtubeUrl: 'https://youtube.com',
-    videos: [
-      'https://www.youtube.com/embed/DCopcNpzc60',
-      'https://www.youtube.com/embed/oGlDJ3GxvLc',
-    ],
-  },
-  {
-    id: 7,
-    name: 'Juontaja Kimmo Oksanen',
-    description: 'Lyhyt kuvaus Kimmo Oksasesta.',
-    imageUrl: '/images/artists_jpg.jpg',
-    facebookUrl: 'https://facebook.com',
-    instagramUrl: 'https://instagram.com',
-    youtubeUrl: 'https://youtube.com',
-    videos: [
-      'https://www.youtube.com/embed/DCopcNpzc60',
-      'https://www.youtube.com/embed/oGlDJ3GxvLc',
-    ],
-  },
-  {
-    id: 8,
-    name: 'Toni Jokiniitty',
-    description: 'Lyhyt kuvaus Toni Jokiniitystä.',
-    imageUrl: '/images/artists_jpg.jpg',
-    facebookUrl: 'https://facebook.com',
-    instagramUrl: 'https://instagram.com',
-    youtubeUrl: 'https://youtube.com',
-    videos: [
-      'https://www.youtube.com/embed/DCopcNpzc60',
-      'https://www.youtube.com/embed/oGlDJ3GxvLc',
-    ],
-  },
-  {
-    id: 9,
-    name: 'Joonas Eloranta',
-    description: 'Lyhyt kuvaus Joonas Elorannasta.',
-    imageUrl: '/images/artists_jpg.jpg',
-    facebookUrl: 'https://facebook.com',
-    instagramUrl: 'https://instagram.com',
-    youtubeUrl: 'https://youtube.com',
-    videos: [
-      'https://www.youtube.com/embed/DCopcNpzc60',
-      'https://www.youtube.com/embed/oGlDJ3GxvLc',
-    ],
-  },
-  {
-    id: 10,
-    name: 'PUSHKIN Quintett',
-    description: 'Lyhyt kuvaus PUSHKIN Quintetista.',
-    imageUrl: '/images/artists_jpg.jpg',
-    facebookUrl: 'https://facebook.com',
-    instagramUrl: 'https://instagram.com',
-    youtubeUrl: 'https://youtube.com',
-    videos: [
-      'https://www.youtube.com/embed/DCopcNpzc60',
-      'https://www.youtube.com/embed/oGlDJ3GxvLc',
-    ],
-  },
-  {
-    id: 11,
-    name: 'Night Shift',
-    description: 'Lyhyt kuvaus Night Shiftistä.',
-    imageUrl: '/images/artists_jpg.jpg',
-    facebookUrl: 'https://facebook.com',
-    instagramUrl: 'https://instagram.com',
-    youtubeUrl: 'https://youtube.com',
-    videos: [
-      'https://www.youtube.com/embed/DCopcNpzc60',
-      'https://www.youtube.com/embed/oGlDJ3GxvLc',
-    ],
-  },
-  {
-    id: 12,
-    name: 'Henriikka Roo',
-    description: 'Lyhyt kuvaus Henriikka Roosta.',
-    imageUrl: '/images/artists_jpg.jpg',
-    facebookUrl: 'https://facebook.com',
-    instagramUrl: 'https://instagram.com',
-    youtubeUrl: 'https://youtube.com',
-    videos: [
-      'https://www.youtube.com/embed/DCopcNpzc60',
-      'https://www.youtube.com/embed/oGlDJ3GxvLc',
-    ],
-  },
-  {
-    id: 13,
-    name: 'Tampereen Ukuleleorkesteri',
-    description: 'Lyhyt kuvaus Tampereen Ukuleleorkesterista.',
-    imageUrl: '/images/artists_jpg.jpg',
-    facebookUrl: 'https://facebook.com',
-    instagramUrl: 'https://instagram.com',
-    youtubeUrl: 'https://youtube.com',
-    videos: [
-      'https://www.youtube.com/embed/DCopcNpzc60',
-      'https://www.youtube.com/embed/oGlDJ3GxvLc',
-    ],
-  },
-]
+const db = require('../db') // Подключаем файл с настройками базы данных
 
-// Controller function: Get all artists
-const getAllArtists = (req, res) => {
-  res.json(artists)
+// Controller: Get all artists from the database
+const getAllArtists = async (req, res) => {
+  try {
+    const [rows] = await db.query('SELECT * FROM artists')
+    res.json(rows)
+  } catch (error) {
+    console.error('Error fetching artists:', error.message, error.stack)
+    res.status(500).json({ message: 'Failed to fetch artists' })
+  }
 }
 
-// Controller function: Get a single artist by ID
-const getArtistById = (req, res) => {
-  const { id } = req.params
-  const artist = artists.find((a) => a.id === parseInt(id, 10))
+// Controller: Get a single artist by ID
+const getArtistById = async (req, res) => {
+  const id = parseInt(req.params.id, 10) // Валидация ID
+  if (isNaN(id)) {
+    return res.status(400).json({ message: 'Invalid artist ID' })
+  }
 
-  if (artist) {
-    res.json(artist)
-  } else {
-    res.status(404).json({ message: 'Artist not found' })
+  try {
+    const [rows] = await db.query('SELECT * FROM artists WHERE id = ?', [id])
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'Artist not found' })
+    }
+    res.json(rows[0])
+  } catch (error) {
+    console.error('Error fetching artist by ID:', error.message, error.stack)
+    res.status(500).json({ message: 'Failed to fetch artist' })
   }
 }
 
