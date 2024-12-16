@@ -45,6 +45,62 @@ INSERT INTO `artists` VALUES (1,'Anna Katariina','Lyhyt kuvaus Anna Katariinasta
 UNLOCK TABLES;
 
 --
+-- Table structure for table `pianist_videos`
+--
+
+DROP TABLE IF EXISTS `pianist_videos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pianist_videos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `pianist_id` int NOT NULL,
+  `videoUrl` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pianist_id` (`pianist_id`),
+  CONSTRAINT `pianist_videos_ibfk_1` FOREIGN KEY (`pianist_id`) REFERENCES `pianists` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pianist_videos`
+--
+
+LOCK TABLES `pianist_videos` WRITE;
+/*!40000 ALTER TABLE `pianist_videos` DISABLE KEYS */;
+INSERT INTO `pianist_videos` VALUES (1,1,'https://www.youtube.com/embed/DCopcNpzc60'),(2,1,'https://www.youtube.com/embed/oGlDJ3GxvLc'),(3,2,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(4,2,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(5,3,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(6,3,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(7,4,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(8,4,'https://www.youtube.com/embed/dQw4w9WgXcQ'),(9,5,'https://www.youtube.com/embed/kJQP7kiw5Fk'),(10,5,'https://www.youtube.com/embed/dQw4w9WgXcQ');
+/*!40000 ALTER TABLE `pianist_videos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pianists`
+--
+
+DROP TABLE IF EXISTS `pianists`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pianists` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `imageUrl` varchar(255) DEFAULT NULL,
+  `moreInfoUrl` varchar(255) DEFAULT NULL,
+  `facebookUrl` varchar(255) DEFAULT NULL,
+  `instagramUrl` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pianists`
+--
+
+LOCK TABLES `pianists` WRITE;
+/*!40000 ALTER TABLE `pianists` DISABLE KEYS */;
+INSERT INTO `pianists` VALUES (1,'Piia Kristiina','Klassiselta taustalta monipuoliseksi viihdepianistiksi kehittynyt. Keikkailee aktiivisesti Duo Primadonnien, Duo Songbirdsin ja muiden kanssa. Musiikillisesti Piia on omistautunut viihdepianon soitolle, jolle ei löydy rajoituksia.','/images/pianist.jpg','/pianists/piia-kristiina','https://facebook.com','https://instagram.com'),(2,'Ruut','Ruut on soittanut klassista pianoa 19 vuotta Tampereen konservatoriossa. Hän soittaa tyylikästä kevyttä musiikkia, jatsahtavia viihdemusiikin klassikoita ja ikivihreitä.','/images/pianist.jpg','/pianists/ruut','https://facebook.com','https://instagram.com'),(3,'Laura','Laura on musiikin ammattilainen, joka soittaa jazzia ja klassista musiikkia. Hän on myös musiikkiopiston rehtori ja esiintyy aktiivisesti sekä pianistin että viulistin rooleissa.','/images/pianist.jpg','/pianists/laura','https://facebook.com','https://instagram.com'),(4,'Arto','Arto on romanttinen ja tunteikas pianisti, jonka soittotyyli on vaikuttunut Chopinista. Hänen musiikkinsa viehättää monia ja se sopii erinomaisesti solistin säestyksiksi tai ruokailun taustalle.','/images/pianist.jpg','/pianists/arto','https://facebook.com','https://instagram.com'),(5,'Joonas','Joonas on monipuolinen freelance-muusikko, joka on erikoistunut viihdemusiikkiin ja jazziin. Hänen ohjelmistonsa kattaa laajan valikoiman musiikkityylejä, ja hän on soittanut monilla teatterilavoilla.','/images/pianist.jpg','/pianists/joonas','https://facebook.com','https://instagram.com');
+/*!40000 ALTER TABLE `pianists` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `service_details`
 --
 
@@ -108,4 +164,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-16 13:28:29
+-- Dump completed on 2024-12-16 14:33:21

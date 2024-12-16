@@ -17,11 +17,22 @@ const port = 3000
 app.use(morgan('dev')) // Logs all incoming requests
 app.use(cors()) // Enable CORS for all routes
 app.use(express.json()) // Parse incoming JSON requests
-console.log(path.join(__dirname, '../PianoViihdeProggis/public/images'))
+
 app.use(
   '/images',
   express.static(path.join(__dirname, '../PianoViihde/public/images'))
 )
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+  )
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+  res.setHeader('Access-Control-Allow-Credentials', true)
+  next()
+})
 
 // Use the services routes
 app.use('/api/services', servicesRouter)
@@ -30,7 +41,7 @@ app.use('/api/services', servicesRouter)
 app.use('/api/artists', artistsRouter)
 
 // Use the pianists routes
-app.use(pianistsRouter)
+app.use('/api/pianists', pianistsRouter)
 
 // Use the Instagram routes
 app.use('/api/instagram', instagramRouter)
