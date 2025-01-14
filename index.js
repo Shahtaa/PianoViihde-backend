@@ -8,6 +8,7 @@ const servicesRouter = require('./routes/services')
 const artistsRouter = require('./routes/artists')
 const pianistsRouter = require('./routes/pianists')
 const instagramRouter = require('./routes/instagram')
+const contactRouter = require('./routes/contact');
 const gigsRouter = require('./routes/gigs') // Import the gigs router
 
 const app = express() // Переместите инициализацию app сюда
@@ -48,6 +49,9 @@ app.use('/api/instagram', instagramRouter)
 
 // Use the gigs routes
 app.use('/api/gigs', gigsRouter) // Add the gigs router
+// Use contact router
+app.use('/api/contact', contactRouter);
+
 
 // Define a route for the root endpoint
 app.get('/', (req, res) => {
