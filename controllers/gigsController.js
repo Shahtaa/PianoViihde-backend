@@ -6,10 +6,7 @@ const getGigs = async (req, res) => {
   const { limit = 5, offset = 0 } = req.query // Default limit is 5, offset is 0
 
   try {
-    const [rows] = await db.query('SELECT * FROM gigs LIMIT ? OFFSET ?', [
-      limit,
-      offset,
-    ])
+    const [rows] = await db.query('SELECT * FROM gigs');
 
     // Форматируем дату перед отправкой, убираем время
     const formattedGigs = rows.map((gig) => {
