@@ -20,7 +20,21 @@ const getPianistById = async (req, res) => {
 
   try {
     const [pianistRows] = await db.query(
-      'SELECT id, name, description, imageUrl, moreInfoUrl, videos FROM pianists WHERE id = ?',
+      `SELECT 
+        pianists.id, 
+        pianists.name, 
+        pianists.description, 
+        pianists.imageUrl, 
+        pianists.moreInfoUrl, 
+        JSON_ARRAYAGG(pianist_videos.videoUrl) AS videos
+      FROM 
+        pianists
+      LEFT JOIN 
+        pianist_videos ON pianists.id = pianist_videos.pianist_id
+      WHERE 
+        pianists.id = ?
+      GROUP BY 
+        pianists.id, pianists.name, pianists.description, pianists.imageUrl, pianists.moreInfoUrl`,
       [id]
     );
 
@@ -50,45 +64,53 @@ const getPianistById = async (req, res) => {
 
 
 
-// Создание нового пианиста
 const createPianist = async (req, res) => {
   const { name, description, imageUrl, moreInfoUrl, videos } = req.body;
 
+  // Проверка обязательных полей
   if (!name || !description || !imageUrl) {
     return res.status(400).json({ message: 'Name, description, and imageUrl are required' });
   }
 
   try {
-    // Если видео передается как массив, преобразуем его в строку с разделением запятыми
-    const videoUrls = Array.isArray(videos) ? videos.join(',') : videos;
-
-    // Вставка нового пианиста в таблицу
+    // Вставка нового пианиста в таблицу pianists (без поля videos)
     const [result] = await db.query(
-      'INSERT INTO pianists (name, description, imageUrl, moreInfoUrl, videos) VALUES (?, ?, ?, ?, ?)',
-      [name, description, imageUrl, moreInfoUrl, videoUrls] // Сохраняем видео как строку
+      'INSERT INTO pianists (name, description, imageUrl, moreInfoUrl) VALUES (?, ?, ?, ?)',
+      [name, description, imageUrl, moreInfoUrl]
     );
 
     const pianistId = result.insertId; // Получаем ID нового пианиста
 
     // Если есть видео, добавляем их в таблицу pianist_videos
-    if (videos) {
-      const videoPromises = videoUrls.split(',').map(videoUrl => {
+    if (videos && videos.length) {
+      const videoUrls = Array.isArray(videos) ? videos : [videos]; // Если это не массив, преобразуем в массив
+
+      // Добавление видео в таблицу pianist_videos
+      const videoPromises = videoUrls.map(videoUrl => {
         return db.query(
           'INSERT INTO pianist_videos (pianist_id, videoUrl) VALUES (?, ?)',
           [pianistId, videoUrl]
         );
       });
 
-      // Дожидаемся завершения всех запросов
+      // Дожидаемся завершения всех запросов на добавление видео
       await Promise.all(videoPromises);
+      console.log("Videos added successfully for pianist:", pianistId); // Логируем успешное добавление видео
     }
 
+    // Ответ с успешным созданием пианиста
     res.status(201).json({ message: 'Pianist created successfully', pianistId });
   } catch (error) {
-    console.error('Error creating pianist:', error.message);
+    console.error('Error creating pianist:', error.message); // Логируем ошибку
     res.status(500).json({ message: 'Failed to create pianist' });
   }
 };
+
+
+
+
+
+
 
 
 module.exports = {
