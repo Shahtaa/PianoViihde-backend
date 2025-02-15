@@ -4,6 +4,7 @@ const path = require('path')
 const cors = require('cors')
 const morgan = require('morgan')
 
+const reviewsRouter = require('./routes/reviews');
 const servicesRouter = require('./routes/services')
 const artistsRouter = require('./routes/artists')
 const pianistsRouter = require('./routes/pianists')
@@ -38,6 +39,8 @@ app.use((req, res, next) => {
 
 // Use the services routes
 app.use('/api/services', servicesRouter)
+// Use the reviews route
+app.use('/api/reviews', reviewsRouter);
 
 // Use the artists routes
 app.use('/api/artists', artistsRouter)
