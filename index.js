@@ -14,7 +14,7 @@ const pianistVideosRouter = require('./routes/pianistVideos')
 const gigsRouter = require('./routes/gigs') // Import the gigs router
 
 const app = express() // Переместите инициализацию app сюда
-const port = 3000
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(morgan('dev')) // Logs all incoming requests
