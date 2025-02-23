@@ -18,7 +18,6 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(morgan('dev')) // Logs all incoming requests
-const cors = require('cors');
 app.use(cors());
 app.use(express.json()) // Parse incoming JSON requests
 
