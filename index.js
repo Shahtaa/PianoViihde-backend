@@ -18,7 +18,11 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(morgan('dev')) // Logs all incoming requests
-app.use(cors()) // Enable CORS for all routes
+app.use(cors({
+  origin: '*', // Разрешает доступ со всех доменов
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json()) // Parse incoming JSON requests
 
 app.use(
