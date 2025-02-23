@@ -1,15 +1,15 @@
-const db = require('../db') // Подключение к базе данных
+const db = require('../db'); // Подключение к базе данных
 
 // Получить всех пианистов
 const getAllPianists = async (req, res) => {
   try {
-    const [rows] = await db.query('SELECT * FROM pianists')
-    res.json(rows)
+    const [rows] = await db.query('SELECT * FROM pianists');
+    res.json(rows);
   } catch (error) {
-    console.error('Error fetching pianists:', error.message)
-    res.status(500).json({ message: 'Failed to fetch pianists' })
+    console.error('Error fetching pianists:', error.message);
+    res.status(500).json({ message: 'Failed to fetch pianists' });
   }
-}
+};
 
 // Получить пианиста по ID
 const getPianistById = async (req, res) => {
@@ -26,7 +26,7 @@ const getPianistById = async (req, res) => {
         pianists.description, 
         pianists.imageUrl, 
         pianists.moreInfoUrl, 
-        JSON_ARRAYAGG(pianist_videos.videoUrl) AS videos
+        COALESCE(JSON_ARRAYAGG(pianist_videos.videoUrl), '[]') AS videos
       FROM 
         pianists
       LEFT JOIN 
@@ -44,14 +44,8 @@ const getPianistById = async (req, res) => {
 
     const pianist = pianistRows[0];
 
-    // Проверка, является ли videos строкой
-    if (typeof pianist.videos === 'string') {
-      // Если это строка, разделяем её на массив
-      pianist.videos = pianist.videos.split(',');
-    } else if (Array.isArray(pianist.videos)) {
-      // Если это массив, ничего не меняем
-      pianist.videos = pianist.videos.map(video => video.videoUrl || video); // Если это массив объектов, извлекаем URL
-    }
+    // ✅ Парсим `videos`, так как JSON_ARRAYAGG возвращает строку
+    pianist.videos = JSON.parse(pianist.videos || '[]');
 
     res.json(pianist);
   } catch (error) {
@@ -60,10 +54,7 @@ const getPianistById = async (req, res) => {
   }
 };
 
-
-
-
-
+// Создать нового пианиста
 const createPianist = async (req, res) => {
   const { name, description, imageUrl, moreInfoUrl, videos } = req.body;
 
@@ -81,12 +72,10 @@ const createPianist = async (req, res) => {
 
     const pianistId = result.insertId; // Получаем ID нового пианиста
 
-    // Если есть видео, добавляем их в таблицу pianist_videos
-    if (videos && videos.length) {
-      const videoUrls = Array.isArray(videos) ? videos : [videos]; // Если это не массив, преобразуем в массив
-
+    // ✅ Проверка наличия видео перед `map()`
+    if (Array.isArray(videos) && videos.length > 0) {
       // Добавление видео в таблицу pianist_videos
-      const videoPromises = videoUrls.map(videoUrl => {
+      const videoPromises = videos.map(videoUrl => {
         return db.query(
           'INSERT INTO pianist_videos (pianist_id, videoUrl) VALUES (?, ?)',
           [pianistId, videoUrl]
@@ -95,26 +84,19 @@ const createPianist = async (req, res) => {
 
       // Дожидаемся завершения всех запросов на добавление видео
       await Promise.all(videoPromises);
-      console.log("Videos added successfully for pianist:", pianistId); // Логируем успешное добавление видео
+      console.log('Videos added successfully for pianist:', pianistId);
     }
 
     // Ответ с успешным созданием пианиста
     res.status(201).json({ message: 'Pianist created successfully', pianistId });
   } catch (error) {
-    console.error('Error creating pianist:', error.message); // Логируем ошибку
+    console.error('Error creating pianist:', error.message);
     res.status(500).json({ message: 'Failed to create pianist' });
   }
 };
 
-
-
-
-
-
-
-
 module.exports = {
   getAllPianists,
   getPianistById,
-  createPianist,  // Добавляем новый метод для экспорта
-}
+  createPianist,
+};
