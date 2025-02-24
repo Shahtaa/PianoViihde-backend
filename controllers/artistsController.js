@@ -1,6 +1,6 @@
-const db = require('../db') // Подключение к базе данных
+const db = require('../db')
 
-// Получить всех артистов с видео
+// Get all artists with videos
 const getAllArtists = async (req, res) => {
   try {
     const [rows] = await db.query('SELECT * FROM artists')
@@ -21,7 +21,7 @@ const getAllArtists = async (req, res) => {
   }
 }
 
-// Получить артиста по ID с видео
+// Get an artist by ID with videos
 const getArtistById = async (req, res) => {
   const id = parseInt(req.params.id, 10)
   if (isNaN(id)) {
@@ -29,7 +29,7 @@ const getArtistById = async (req, res) => {
   }
 
   try {
-    // Получение информации об артисте
+    // Getting artist information
     const [artistRows] = await db.query('SELECT * FROM artists WHERE id = ?', [
       id,
     ])
@@ -37,7 +37,7 @@ const getArtistById = async (req, res) => {
       return res.status(404).json({ message: 'Artist not found' })
     }
 
-    // Получение видео для артиста
+    // Getting videos for the artist
     const [videoRows] = await db.query(
       'SELECT videoUrl FROM artist_videos WHERE artist_id = ?',
       [id]

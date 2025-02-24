@@ -1,6 +1,6 @@
-const db = require('../db'); // Подключение к базе данных
+const db = require('../db'); // Connecting to the database
 
-// Получить всех пианистов
+// Get all pianists
 const getAllPianists = async (req, res) => {
   try {
     const [rows] = await db.query('SELECT * FROM pianists');
@@ -11,7 +11,7 @@ const getAllPianists = async (req, res) => {
   }
 };
 
-// Получить пианиста по ID
+// Get a pianist by ID
 const getPianistById = async (req, res) => {
   const id = parseInt(req.params.id, 10);
   if (isNaN(id)) {
@@ -44,7 +44,7 @@ const getPianistById = async (req, res) => {
 
     const pianist = pianistRows[0];
 
-    // ✅ Парсим `videos`, так как JSON_ARRAYAGG возвращает строку
+   // Parsing videos since JSON_ARRAYAGG returns a string
     pianist.videos = JSON.parse(pianist.videos || '[]');
 
     res.json(pianist);
@@ -54,27 +54,27 @@ const getPianistById = async (req, res) => {
   }
 };
 
-// Создать нового пианиста
+// Create a new pianist
 const createPianist = async (req, res) => {
   const { name, description, imageUrl, moreInfoUrl, videos } = req.body;
 
-  // Проверка обязательных полей
+ // Checking for required fields
   if (!name || !description || !imageUrl) {
     return res.status(400).json({ message: 'Name, description, and imageUrl are required' });
   }
 
   try {
-    // Вставка нового пианиста в таблицу pianists (без поля videos)
+    // Inserting a new pianist into the pianists table (without the videos field)
     const [result] = await db.query(
       'INSERT INTO pianists (name, description, imageUrl, moreInfoUrl) VALUES (?, ?, ?, ?)',
       [name, description, imageUrl, moreInfoUrl]
     );
 
-    const pianistId = result.insertId; // Получаем ID нового пианиста
+    const pianistId = result.insertId; // Getting the ID of the new pianist
 
-    // ✅ Проверка наличия видео перед `map()`
+    // Checking for the presence of videos before map()
     if (Array.isArray(videos) && videos.length > 0) {
-      // Добавление видео в таблицу pianist_videos
+      // Adding a video to the pianist_videos table
       const videoPromises = videos.map(videoUrl => {
         return db.query(
           'INSERT INTO pianist_videos (pianist_id, videoUrl) VALUES (?, ?)',
@@ -82,12 +82,12 @@ const createPianist = async (req, res) => {
         );
       });
 
-      // Дожидаемся завершения всех запросов на добавление видео
+     // Waiting for all video insert queries to complete
       await Promise.all(videoPromises);
       console.log('Videos added successfully for pianist:', pianistId);
     }
 
-    // Ответ с успешным созданием пианиста
+   // Response with successful pianist creation
     res.status(201).json({ message: 'Pianist created successfully', pianistId });
   } catch (error) {
     console.error('Error creating pianist:', error.message);

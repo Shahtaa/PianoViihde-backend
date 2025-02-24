@@ -1,18 +1,18 @@
 // gigsController.js
-const db = require('../db'); // Подключаем базу данных
+const db = require('../db'); // Connecting to the database
 
-// Получить концерты с пагинацией (limit и offset)
+// Get concerts with pagination (limit и offset)
 const getGigs = async (req, res) => {
   const { limit = 5, offset = 0 } = req.query; // Default limit is 5, offset is 0
 
   try {
     const [rows] = await db.query('SELECT * FROM gigs');
 
-    // Форматируем дату перед отправкой, убираем время
+    //  Formatting the date before sending, removing the time
     const formattedGigs = rows.map((gig) => {
       return {
         ...gig,
-        date: new Date(gig.date).toLocaleDateString('en-GB'), // Преобразуем дату в формат "DD/MM/YYYY"
+        date: new Date(gig.date).toLocaleDateString('en-GB'), // Converting the date to the "DD/MM/YYYY" format
       };
     });
 
@@ -23,11 +23,11 @@ const getGigs = async (req, res) => {
   }
 };
 
-// Новый метод для получения общего количества концертов
+// New method to get the total number of concerts
 const getConcertCount = async (req, res) => {
   try {
     const [rows] = await db.query('SELECT COUNT(*) AS count FROM gigs');
-    res.json({ count: rows[0].count }); // Возвращаем количество концертов
+    res.json({ count: rows[0].count }); // Returning the number of concerts
   } catch (error) {
     console.error('Error fetching concert count:', error.message);
     res.status(500).json({ message: 'Failed to fetch concert count' });

@@ -3,11 +3,11 @@ const router = express.Router();
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
-// Проверяем, загружены ли переменные
+// Checking if the variables are loaded
 console.log('EMAIL_USER:', process.env.EMAIL_USER);
 console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? '*****' : 'Not set');
 
-// Настройка транспорта для отправки email
+// Configuring transport for sending emails
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Обработка POST-запроса для отправки email
+// Handling POST request for sending an email
 router.post('/', async (req, res) => {
   const { name, email, phone, subject, date, message } = req.body;
 
@@ -30,15 +30,15 @@ router.post('/', async (req, res) => {
   });
 
   try {
-    // Проверяем, загружены ли EMAIL_USER и EMAIL_PASS
+    // Checking if EMAIL_USER and EMAIL_PASS are loaded
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
       throw new Error('EMAIL_USER or EMAIL_PASS is missing in environment variables');
     }
 
-    // Содержание письма
+    // Email content
     const mailOptions = {
-      from: `"Website Contact Form" <${process.env.EMAIL_USER}>`, // Фиксируем "from"
-      to: 'anton.devaaja@gmail.com', // Твой email
+      from: `"Website Contact Form" <${process.env.EMAIL_USER}>`, 
+      to: 'anton.devaaja@gmail.com', // YOur mail
       subject: `New Message: ${subject || 'No Subject'}`,
       text: `
         Name: ${name}
@@ -47,10 +47,10 @@ router.post('/', async (req, res) => {
         Date: ${date || 'Not provided'}
         Message: ${message}
       `,
-      replyTo: email, // Это ОК, но from и replyTo не должны конфликтовать
+      replyTo: email,
     };
 
-    // Отправляем email
+    // Sending email
     const info = await transporter.sendMail(mailOptions);
     console.log('Email sent successfully:', info.response);
 

@@ -13,7 +13,7 @@ const contactRouter = require('./routes/contact');
 const pianistVideosRouter = require('./routes/pianistVideos')
 const gigsRouter = require('./routes/gigs') // Import the gigs router
 
-const app = express() // Переместите инициализацию app сюда
+const app = express() 
 const port = process.env.PORT || 3000;
 
 // Middleware

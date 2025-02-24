@@ -1,6 +1,6 @@
-const db = require('../db'); // Подключаем MySQL соединение
+const db = require('../db'); // Connecting to MySQL database
 
-// Функция для получения всех отзывов
+// Function to getting all reviews
 const getAllReviews = async (req, res) => {
   try {
     const [reviews] = await db.query(

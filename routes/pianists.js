@@ -3,16 +3,16 @@ const router = express.Router();
 const {
   getAllPianists,
   getPianistById,
-  createPianist,  // Импортируем метод для создания пианиста
+  createPianist,  // Import the method for creating a pianis
 } = require('../controllers/pianistsController')
 
-// Маршрут для получения всех пианистов
+// Route for getting all pianists
 router.get('/', getAllPianists);
 
-// Маршрут для получения пианиста по ID
+// Route for retrieving a pianist by ID
 router.get('/:id', getPianistById);
 
-// Маршрут для создания нового пианиста
-router.post('/', createPianist);  // Новый маршрут для создания пианиста
+// Route for creating a new pianist
+router.post('/', createPianist);  // New route for creating a pianist
 
 module.exports = router;

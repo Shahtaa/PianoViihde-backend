@@ -6,13 +6,13 @@ const {
   deleteVideo,
 } = require('../controllers/pianistVideosController')
 
-// Получить видео для конкретного пианиста
+// Get videos for a specific pianist
 router.get('/:pianist_id', getVideosByPianistId)
 
-// Добавить видео для пианиста
+// Add a video for a pianist
 router.post('/', addVideoForPianist)
 
-// Удалить видео по ID
+// Delete a video by ID
 router.delete('/:id', deleteVideo)
 
 module.exports = router

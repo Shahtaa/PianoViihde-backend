@@ -37,7 +37,7 @@ const getServiceById = async (req, res) => {
       [serviceId]
     )
 
-    service.details = details // Добавить детали к услуге
+    service.details = details // Add details to the service
     res.json(service)
   } catch (error) {
     console.error('Error fetching service by ID:', error.message)
