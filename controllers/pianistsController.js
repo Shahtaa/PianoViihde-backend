@@ -1,6 +1,6 @@
 const db = require('../db'); // Connecting to the database
 
-// Get all pianists
+// Get all pianists  
 const getAllPianists = async (req, res) => {
   try {
     const [rows] = await db.query('SELECT * FROM pianists');
