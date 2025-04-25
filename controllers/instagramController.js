@@ -8,6 +8,8 @@ const getInstagramFeed = async (req, res) => {
       `https://graph.instagram.com/me/media?fields=id,caption,media_url,thumbnail_url,permalink&access_token=${ACCESS_TOKEN}`
     )
 
+    console.log('ACCESS_TOKEN:', ACCESS_TOKEN)
+  
    // Let's make sure the data is correct
     const data = response.data.data.map((item) => ({
       id: item.id,
@@ -19,9 +21,17 @@ const getInstagramFeed = async (req, res) => {
 
     res.json(data) // Returning the processed data
   } catch (error) {
-    console.error('Error fetching Instagram feed:', error)
-    res.status(500).json({ error: 'Failed to fetch Instagram feed' })
+    console.error('Instagram API error:');
+    if (error.response) {
+      console.error('Status:', error.response.status);
+      console.error('Data:', error.response.data);
+    } else {
+      console.error('Message:', error.message);
+    }
+  
+    res.status(500).json({ error: 'Failed to fetch Instagram feed' });
   }
+  
 }
 
 module.exports = { getInstagramFeed }

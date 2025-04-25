@@ -31,7 +31,8 @@ const getPianistById = async (req, res) => {
         pianists.name, 
         pianists.description, 
         pianists.imageUrl, 
-        pianists.moreInfoUrl, 
+        pianists.moreInfoUrl,
+	pianists.image, 
         COALESCE(JSON_ARRAYAGG(pianist_videos.videoUrl), '[]') AS videos
       FROM 
         pianists
@@ -40,7 +41,7 @@ const getPianistById = async (req, res) => {
       WHERE 
         pianists.id = ?
       GROUP BY 
-        pianists.id, pianists.name, pianists.description, pianists.imageUrl, pianists.moreInfoUrl`,
+        pianists.id, pianists.name, pianists.description, pianists.imageUrl, pianists.moreInfoUrl, pianists.image`,
       [id]
     );
 

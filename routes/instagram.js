@@ -1,9 +1,8 @@
-const express = require('express')
-const { getInstagramFeed } = require('../controllers/instagramController')
+// routes/instagram.js
+const express = require('express');
+const { getInstagramFeed } = require('../controllers/instagramController');
+const router = express.Router();
 
-const router = express.Router()
+router.get('/feed', getInstagramFeed); // 👈 Только /feed
 
-// Route for getting Instagram Feed
-router.get('/feed', getInstagramFeed)
-
-module.exports = router
+module.exports = router;

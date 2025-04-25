@@ -16,6 +16,11 @@ const gigsRouter = require('./routes/gigs') // Import the gigs router
 const app = express() 
 const port = process.env.PORT || 3000;
 
+app.use((req, res, next) => {
+  console.log(`Request received: ${req.method} ${req.originalUrl}`);
+  next();
+});
+
 // Middleware
 app.use(morgan('dev')) // Logs all incoming requests
 app.use(cors());
@@ -49,7 +54,7 @@ app.use('/api/artists', artistsRouter)
 app.use('/api/pianists', pianistsRouter)
 
 // Use the Instagram routes
-app.use('/api/instagram', instagramRouter)
+app.use('/api/instagram', instagramRouter);
 
 // Use the gigs routes
 app.use('/api/gigs', gigsRouter) // Add the gigs router
